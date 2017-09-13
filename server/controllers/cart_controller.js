@@ -3,10 +3,12 @@ const swag = require('../models/swag');
 module.exports = {
     add: (req, res, next) => {
         const { id } = req.query;
-        let { cart } = req.session.user;
+        let { cart } = req.session.user; 
 
         // This will return -1 if it isn't in the cart
-        const index = cart.findIndex( swag => swag.id == id );
+        const index = cart.findIndex( cartProduct => cartProduct.id == id );
+
+        //findIndex() method will return the index of an item if it is found if not it will return -1. First we check to see if the item they are trying to add to the cart is already in the cart if it is then we skip over the if statement and just res.send(200) with the user object on session. If not we go into the if statement below since index will return -1 and find the item in the collection of swag projects and then push it onto the card and increase the total of the price on the user object. 
 
         if ( index === -1 ) {
             const selectedSwag = swag.find( swag => swag.id == id );

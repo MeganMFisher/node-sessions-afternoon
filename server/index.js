@@ -19,7 +19,7 @@ app.use(session ({
 app.use( checkForSession );
 app.use( express.static( `${__dirname}/../public/build` ) );
 
-const port = 3000;
+const port = 3010;
 
 
 // Swag
